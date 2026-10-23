@@ -8,83 +8,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#f2f4f7; --surface:#ffffff; --ink:#101820; --muted:#566170;
-  --line:#d5dae1; --accent:#2446d8; --hl:#f2a900;
-  --head:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
-  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
-}
-@media (prefers-color-scheme:dark){
-  :root{--bg:#0e141b; --surface:#151d27; --ink:#eaeef3; --muted:#9aa6b5; --line:#2a3542; --accent:#7f9bff; --hl:#f2b52c;}
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body)}
-a{color:var(--accent)}
-:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
-.wrap{max-width:960px;margin:0 auto;padding:0 1.5rem}
-header.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
-header.top strong{font:700 1.1rem var(--head)}
-nav a{margin-left:1.5rem;color:var(--ink);text-decoration:none;font-weight:500}
-nav a:hover{color:var(--accent);text-decoration:underline}
-
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center;padding:4rem 0 5rem}
-.hero h1{font:700 clamp(2.4rem,6vw,4.1rem)/1.04 var(--head);letter-spacing:-.02em;margin:0 0 1.25rem}
-.hero p{color:var(--muted);max-width:34rem;margin:0 0 1.75rem}
-.btn{display:inline-block;padding:.8rem 1.4rem;border-radius:6px;font-weight:600;text-decoration:none;background:var(--accent);color:#fff}
-.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink);margin-left:.5rem}
-@media (prefers-color-scheme:dark){.btn{color:#0e141b}}
-
-.chart{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.25rem 1.25rem .75rem}
-.chart svg{width:100%;height:auto;display:block}
-.chart .bar{fill:var(--accent);opacity:.9;transform-origin:bottom;transform-box:fill-box;animation:grow .9s cubic-bezier(.2,.7,.2,1) backwards}
-.chart .bar.hl{fill:var(--hl);opacity:1}
-.chart text{fill:var(--muted);font:500 11px var(--body)}
-.chart .base{stroke:var(--line);stroke-width:1.5}
-.chart figcaption{font-size:.85rem;color:var(--muted);margin-top:.5rem}
-@keyframes grow{from{transform:scaleY(0)}}
-@media (prefers-reduced-motion:reduce){.chart .bar{animation:none}html{scroll-behavior:auto}}
-
-section{padding:3.5rem 0;border-top:1px solid var(--line)}
-h2{font:700 1.9rem/1.15 var(--head);letter-spacing:-.01em;margin:0 0 1.5rem}
-.about{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-.about p{margin:0 0 1rem;max-width:34rem}
-dl{margin:0}
-dt{font-weight:600;margin-top:1rem}
-dt:first-child{margin-top:0}
-dd{margin:.15rem 0 0;color:var(--muted)}
-
-.job{display:grid;grid-template-columns:11rem 1fr;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--line)}
-.job:first-of-type{padding-top:0}
-.job time{color:var(--muted);font-size:.95rem}
-.job h3{font:600 1.15rem var(--head);margin:0}
-.job .org{color:var(--muted);margin:0 0 .5rem}
-.job ul{margin:0;padding-left:1.1rem}
-.job li{margin-bottom:.3rem;max-width:38rem}
-.cv{margin-top:1.75rem}
-
-.contact p{max-width:34rem;margin:0 0 1.25rem}
-.contact .links a{margin-right:1.5rem;font-weight:500}
-footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
-
-@media (max-width:760px){
-  .hero,.about{grid-template-columns:1fr;gap:2rem}
-  .hero{padding:2.5rem 0 3.5rem}
-  .job{grid-template-columns:1fr;gap:.25rem}
-  nav a{margin-left:1rem}
-  .btn.alt{margin:.5rem 0 0}
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <strong>Lucas Hsiong</strong>
+    <strong><a href="index.html">Lucas Hsiong</a></strong>
     <nav aria-label="Main">
-      <a href="#about">About</a>
-      <a href="#resume">Résumé</a>
-      <a href="#contact">Contact</a>
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="experience.html">Experience</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
@@ -93,8 +26,8 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px sol
       <div>
         <h1>I turn messy data into clear decisions.</h1>
         <p>I’m a data analyst with 7+ years of experience building data pipelines, dashboards, and reports. I work mostly in Python, SQL, and Power BI, and I’ve spent my career in finance and education software.</p>
-        <a class="btn" href="#contact">Get in touch</a>
-        <a class="btn alt" href="#resume">See my résumé</a>
+        <a class="btn" href="contact.html">Get in touch</a>
+        <a class="btn alt" href="experience.html">See my work</a>
       </div>
       <figure class="chart" style="margin:0">
         <svg viewBox="0 0 280 180" role="img" aria-label="Bar chart with one highlighted bar">
@@ -113,11 +46,12 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px sol
     </div>
 
     <section id="about" aria-labelledby="about-h">
-      <h2 id="about-h">About</h2>
+      <h2 id="about-h">A little about me</h2>
       <div class="about">
         <div>
-          <p>I studied mathematics and economics at UC San Diego, with a business minor and a specialization in finance. I started as an actuarial intern building Tableau dashboards and Excel macros, and since 2019 I’ve been a data and financial analyst at enterprise software companies in San Diego.</p>
-          <p>I like turning raw data into something people can use: pipelines that run on their own, models that are easy to build reports on, and reports that are easy to read. I’ve also managed a direct report and enjoy working with non-technical teams.</p>
+          <p>Hi, I’m Lucas. I’ve been working with data for about seven years, mostly in finance and education software. I studied math and economics at UC San Diego, and I got started building Tableau dashboards and Excel macros as an actuarial intern.</p>
+          <p>These days I build data pipelines, models, and reports, mostly with Python, SQL, and Power BI. My favorite part of the job is when a messy pile of data turns into something a team can actually use. I’ve also managed a direct report and enjoy working with people who don’t live in spreadsheets.</p>
+          <p class="next"><a href="experience.html">See where I’ve worked</a></p>
         </div>
         <dl>
           <dt>Languages and databases</dt>
@@ -130,71 +64,6 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px sol
           <dd>Agile development, data QA, team leadership</dd>
         </dl>
       </div>
-    </section>
-
-    <section id="resume" aria-labelledby="resume-h">
-      <h2 id="resume-h">Résumé</h2>
-
-      <div class="job">
-        <time>February 2024 to present</time>
-        <div>
-          <h3>Senior Financial and Data Analyst</h3>
-          <p class="org">iGrad Financial Wellness, San Diego, CA</p>
-          <ul>
-            <li>Build data pipelines in Microsoft Fabric with Python and SQL, handling complex joins and transformations.</li>
-            <li>Developed semantic models on star schemas, adding DAX calculations for deeper insight in reports.</li>
-            <li>Produce impact data reports and automate the Morningstar Financial Communications Library.</li>
-            <li>QA transformed data in SQL Server Management Studio to keep reporting accurate.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="job">
-        <time>September 2019 to February 2024</time>
-        <div>
-          <h3>Senior Financial and Data Analyst</h3>
-          <p class="org">Financial Fitness Group, San Diego, CA (now part of iGrad)</p>
-          <ul>
-            <li>Joined as an analyst and was promoted to senior within three years. Managed a direct report.</li>
-            <li>Led creation and QA of the annual Morningstar Financial Communications library: 200+ static images and 18 presentations used by financial advisors.</li>
-            <li>Wrote SQL queries that turn client performance data into monthly and ad hoc reports.</li>
-            <li>Built a financial model that reads a Salesforce export and breaks contracts down by month, applying revenue-sharing rules.</li>
-            <li>Wrote Python scripts for data migrations, web scrapes, ETL pipelines, and vendor API integrations, including uploads to MongoDB.</li>
-            <li>Connected course and article content to OpenAI’s 3.5 model so it could answer questions and make recommendations.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="job">
-        <time>June 2016 to August 2017</time>
-        <div>
-          <h3>Actuarial Intern</h3>
-          <p class="org">LifeCare Assurance, Woodland Hills, CA</p>
-          <ul>
-            <li>Used SQL to build interactive Tableau dashboards, including CRM and monthly performance views.</li>
-            <li>Wrote Excel macros that turned daily manual processes into ten-minute tasks.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="job">
-        <time>Graduated June 2019</time>
-        <div>
-          <h3>B.S. Mathematics and Economics (joint major)</h3>
-          <p class="org">University of California, San Diego. Business minor, specialization in finance.</p>
-        </div>
-      </div>
-
-      <p class="cv"><a href="resume.pdf">Download my résumé (PDF)</a></p>
-    </section>
-
-    <section id="contact" class="contact" aria-labelledby="contact-h">
-      <h2 id="contact-h">Contact</h2>
-      <p>Want to talk about a data project or role? Email is the fastest way to reach me.</p>
-      <p class="links">
-        <a href="mailto:lucashsiong@gmail.com">ucsdlucas@gmail.com</a>
-        <a href="https://www.linkedin.com/in/lucas-hsiong">LinkedIn</a>
-      </p>
     </section>
   </main>
 

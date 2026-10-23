@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experience | Lucas Hsiong</title>
+<meta name="description" content="Where Lucas Hsiong has worked and the data tools he used there.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <strong><a href="index.html">Lucas Hsiong</a></strong>
+    <nav aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="experience.html" aria-current="page">Experience</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1>Experience</h1>
+    <p class="lede">A quick tour of where I’ve worked and the tools I used along the way.</p>
+
+      <div class="job">
+        <time>February 2024 to present</time>
+        <div>
+          <h3>Senior Financial and Data Analyst</h3>
+          <p class="org">iGrad, San Diego, CA</p>
+          <p class="story">My old company, Financial Fitness Group, merged into iGrad, so the work carried over. These days I live mostly in Microsoft Fabric, building pipelines with Python and SQL that handle the complicated joins and transformations. On top of that I build semantic models on star schemas and use DAX to add calculated measures, so reports can answer deeper questions. Before anything goes out, I check it in SQL Server Management Studio. I also build our impact data reports and automate the Morningstar Financial Communications Library.</p>
+          <ul class="tags" aria-label="Tools used"><li>Microsoft Fabric</li><li>Python</li><li>SQL</li><li>DAX</li><li>Star schemas</li><li>SQL Server Management Studio</li></ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <time>September 2019 to February 2024</time>
+        <div>
+          <h3>Senior Financial and Data Analyst</h3>
+          <p class="org">Financial Fitness Group, San Diego, CA</p>
+          <p class="story">I started as an analyst and was promoted to senior within three years, and later managed a direct report. A lot of my SQL work was turning client performance data from our education platform into monthly and ad hoc reports people could easily read. I also built a financial model for the sales and accounting teams that reads a Salesforce export, breaks every contract down by month, and applies revenue sharing depending on things like the year and who billed it.</p>
+          <p class="story">On the Python side, I wrote scripts for one-off projects like data migrations, web scrapes, ETL pipelines, and publish/subscribe models, plus integrations with vendor APIs and uploads to MongoDB. I also connected our courses and articles to OpenAI’s 3.5 model so it could answer questions and make recommendations. Every year I led the Morningstar Financial Communications library, an annual update of 200+ images and 18 presentations that financial advisors use with their clients.</p>
+          <ul class="tags" aria-label="Tools used"><li>SQL</li><li>Python</li><li>ETL</li><li>MongoDB</li><li>APIs</li><li>OpenAI</li><li>Excel</li></ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <time>June 2016 to August 2017</time>
+        <div>
+          <h3>Actuarial Intern</h3>
+          <p class="org">LifeCare Assurance, Woodland Hills, CA</p>
+          <p class="story">This is where I started working with data professionally. I used SQL to build interactive Tableau dashboards, including CRM and monthly performance views, and wrote Excel macros that turned daily manual processes into ten-minute tasks. The rest of the time I was organizing and cleaning data with pivot tables, nested IFs, and INDEX/MATCH.</p>
+          <ul class="tags" aria-label="Tools used"><li>SQL</li><li>Tableau</li><li>Excel VBA</li><li>Pivot tables</li></ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <time>Graduated June 2019</time>
+        <div>
+          <h3>B.S. Mathematics and Economics (joint major)</h3>
+          <p class="org">University of California, San Diego. Business minor, specialization in finance.</p>
+        </div>
+      </div>
+
+      <p class="cv"><a href="resume.pdf">Download my résumé (PDF)</a></p>
+      <p class="next"><a href="contact.html">Want to talk? Get in touch</a></p>
+  </main>
+
+  <footer>© <span id="yr">2026</span> Lucas Hsiong</footer>
+</div>
+<script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+</body>
+</html>
