@@ -9,6 +9,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../style.css">
+<style>
+.filters{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;margin:0 0 1rem}
+.filters label{display:flex;flex-direction:column;gap:.3rem;font-size:.9rem;font-weight:600}
+.filters select,.filters input{font:inherit;font-weight:400;padding:.5rem .7rem;min-width:11rem;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+#chart{width:100%;height:560px}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -25,17 +31,23 @@
   <main class="page">
     <p class="next" style="margin:0 0 1rem"><a href="../">← All projects</a></p>
     <h1>Exit velocity vs. launch angle</h1>
-    <p class="lede">[One sentence on what this chart shows, for example: A look at every ball [Player name] put in play in 2025.]</p>
+    <p class="lede">Pick a team or a player and see which batted balls turned into hits and home runs. The data covers every hitter in the 2025 regular season.</p>
 
-    <iframe class="chart-frame" src="chart.html" title="Interactive scatter plot of exit velocity versus launch angle" loading="lazy"></iframe>
-    <p class="source">Data: Baseball Savant / MLB Statcast, pulled with pybaseball. Hover over a dot for details, or <a href="chart.html">open the chart on its own page</a>.</p>
+    <div class="filters">
+      <label>Team <select id="f-team"><option value="">All teams</option></select></label>
+      <label>Player <select id="f-player"><option value="">All players</option></select></label>
+      <label>Minimum plate appearances <input id="f-pa" type="number" min="0" step="10" value="100"></label>
+    </div>
+    <p id="summary" class="source" aria-live="polite">Loading data…</p>
+    <div id="chart" role="img" aria-label="Scatter plot of exit velocity versus launch angle for the selected batted balls"></div>
+    <p class="source">Data: Baseball Savant / MLB Statcast, pulled with pybaseball. Hover over a dot for details. Teams reflect who the batter played for in each game.</p>
 
     <div class="story-block">
       <h2>The question</h2>
       <p>[Why you wanted to look at this. What were you curious about?]</p>
 
       <h2>The data</h2>
-      <p>I pulled pitch-level Statcast data for [Player name]’s 2025 season with the pybaseball package, then kept only the balls put in play that had a measured exit velocity. The dotted line marks 95 mph, which Statcast calls a hard-hit ball.</p>
+      <p>I pulled pitch-level Statcast data for the whole 2025 regular season with the pybaseball package, then kept the balls put in play that had a measured exit velocity and launch angle. Plate appearances are counted from the pitches that ended each one, so they can be off by a few. The dotted line marks 95 mph, which Statcast calls a hard-hit ball. For speed, the chart shows a random sample of 6,000 dots when more balls are selected, but the stats above it use every ball.</p>
 
       <h2>What I found</h2>
       <p>[Two or three sentences about what stood out, such as where the home runs cluster and what happens to hard-hit balls at low launch angles.]</p>
@@ -48,5 +60,97 @@
   <footer>© <span id="yr">2026</span> Lucas Hsiong</footer>
 </div>
 <script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script>
+(async function () {
+  const el = id => document.getElementById(id);
+  let D;
+  try {
+    const r = await fetch('data.json');
+    if (!r.ok) throw new Error(r.status);
+    D = await r.json();
+  } catch (e) {
+    el('summary').textContent = 'Could not load the data file (data.json).';
+    return;
+  }
+  const COLORS = ['#4C78A8', '#72B7B2', '#9D755D', '#F2A900', '#9aa6b5', '#E45756'];
+  const MAX = 6000, n = D.ev.length;
+  const names = D.players.map(p => p[0]), pas = D.players.map(p => p[1]);
+
+  D.teams.forEach((t, i) => {
+    const o = document.createElement('option'); o.value = i; o.textContent = t; el('f-team').appendChild(o);
+  });
+  const teamPlayers = D.teams.map(() => new Set());
+  for (let i = 0; i < n; i++) teamPlayers[D.t[i]].add(D.p[i]);
+
+  // The player list only shows hitters who match the team and minimum plate appearances
+  function fillPlayers() {
+    const team = el('f-team').value, minPA = +el('f-pa').value || 0, sel = el('f-player'), prev = sel.value;
+    sel.length = 1;
+    names.forEach((nm, i) => {
+      if (pas[i] < minPA) return;
+      if (team !== '' && !teamPlayers[+team].has(i)) return;
+      const o = document.createElement('option'); o.value = i; o.textContent = nm; sel.appendChild(o);
+    });
+    sel.value = [...sel.options].some(o => o.value === prev) ? prev : '';
+  }
+
+  function update() {
+    const team = el('f-team').value, minPA = +el('f-pa').value || 0;
+    const pl = el('f-player').value;
+    const idx = [];
+    for (let i = 0; i < n; i++) {
+      const p = D.p[i];
+      if (team !== '' && D.t[i] !== +team) continue;
+      if (pas[p] < minPA) continue;
+      if (pl !== '' && p !== +pl) continue;
+      idx.push(i);
+    }
+    if (!idx.length) {
+      el('summary').textContent = 'No batted balls match these filters. Try a lower minimum plate appearances.';
+      Plotly.purge('chart'); return;
+    }
+    let sum = 0, hard = 0;
+    idx.forEach(i => { sum += D.ev[i]; if (D.ev[i] >= 95) hard++; });
+    let pick = idx;
+    if (idx.length > MAX) {
+      pick = idx.slice();
+      for (let i = 0; i < MAX; i++) {
+        const j = i + Math.floor(Math.random() * (pick.length - i));
+        [pick[i], pick[j]] = [pick[j], pick[i]];
+      }
+      pick = pick.slice(0, MAX);
+    }
+    el('summary').textContent = idx.length.toLocaleString() + ' batted balls · average exit velocity ' +
+      (sum / idx.length).toFixed(1) + ' mph · ' + Math.round(100 * hard / idx.length) + '% hard-hit' +
+      (idx.length > MAX ? ' · showing a random sample of ' + MAX.toLocaleString() + ' dots' : '');
+
+    const traces = D.results.map((r, k) => ({
+      x: [], y: [], text: [], name: r, type: 'scatter', mode: 'markers',
+      marker: { color: COLORS[k], size: 6, opacity: 0.7 },
+      hovertemplate: '%{text}<br>%{y} mph at %{x}°<extra>' + r + '</extra>'
+    }));
+    pick.forEach(i => {
+      const t = traces[D.res[i]];
+      t.x.push(D.la[i]); t.y.push(D.ev[i]); t.text.push(names[D.p[i]]);
+    });
+    const fg = getComputedStyle(document.body).color, grid = 'rgba(128,128,128,.25)';
+    Plotly.react('chart', traces, {
+      paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+      font: { color: fg, family: 'Instrument Sans, Arial, sans-serif' },
+      margin: { t: 20, r: 10, b: 55, l: 60 },
+      xaxis: { title: 'Launch angle (degrees)', gridcolor: grid, zeroline: false },
+      yaxis: { title: 'Exit velocity (mph)', gridcolor: grid, range: [40, 125] },
+      legend: { orientation: 'h', y: -0.22 },
+      shapes: [{ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: 95, y1: 95, line: { dash: 'dot', color: fg, width: 1 } }],
+      annotations: [{ xref: 'paper', x: 1, y: 95, text: 'Hard-hit (95+ mph)', showarrow: false, yanchor: 'bottom', xanchor: 'right', font: { size: 11 } }]
+    }, { responsive: true, displaylogo: false });
+  }
+  ['f-team', 'f-pa'].forEach(id => el(id).addEventListener('input', () => { fillPlayers(); update(); }));
+  el('f-player').addEventListener('change', update);
+  fillPlayers();
+  update();
+})();
+</script>
 </body>
 </html>
