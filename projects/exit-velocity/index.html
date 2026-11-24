@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exit velocity vs. launch angle | Lucas Hsiong</title>
+<meta name="description" content="An interactive chart of exit velocity and launch angle for one hitter, built with Python and Statcast data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <strong><a href="../../">Lucas Hsiong</a></strong>
+    <nav aria-label="Main">
+      <a href="../../">Home</a>
+      <a href="../../experience/">Experience</a>
+      <a href="../../projects/" aria-current="page">Projects</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <p class="next" style="margin:0 0 1rem"><a href="../">← All projects</a></p>
+    <h1>Exit velocity vs. launch angle</h1>
+    <p class="lede">[One sentence on what this chart shows, for example: A look at every ball [Player name] put in play in 2025.]</p>
+
+    <iframe class="chart-frame" src="chart.html" title="Interactive scatter plot of exit velocity versus launch angle" loading="lazy"></iframe>
+    <p class="source">Data: Baseball Savant / MLB Statcast, pulled with pybaseball. Hover over a dot for details, or <a href="chart.html">open the chart on its own page</a>.</p>
+
+    <div class="story-block">
+      <h2>The question</h2>
+      <p>[Why you wanted to look at this. What were you curious about?]</p>
+
+      <h2>The data</h2>
+      <p>I pulled pitch-level Statcast data for [Player name]’s 2025 season with the pybaseball package, then kept only the balls put in play that had a measured exit velocity. The dotted line marks 95 mph, which Statcast calls a hard-hit ball.</p>
+
+      <h2>What I found</h2>
+      <p>[Two or three sentences about what stood out, such as where the home runs cluster and what happens to hard-hit balls at low launch angles.]</p>
+
+      <h2>Tools</h2>
+      <ul class="tags" aria-label="Tools used"><li>Python</li><li>pybaseball</li><li>pandas</li><li>Plotly</li></ul>
+    </div>
+  </main>
+
+  <footer>© <span id="yr">2026</span> Lucas Hsiong</footer>
+</div>
+<script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+</body>
+</html>

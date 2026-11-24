@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | Lucas Hsiong</title>
+<meta name="description" content="An evergrowing set of data projects by Lucas, mostly sports analytics built with Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <strong><a href="../">Lucas Hsiong</a></strong>
+    <nav aria-label="Main">
+      <a href="../">Home</a>
+      <a href="../experience/">Experience</a>
+      <a href="../projects/" aria-current="page">Projects</a>
+      <a href="../contact/">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1>Projects</h1>
+    <p class="lede">Things I build for fun, mostly with baseball data. More coming soon.</p>
+    <div class="cards">
+      <article class="card">
+        <h2><a href="exit-velocity/">Exit velocity vs. launch angle</a></h2>
+        <p>Which batted balls turn into hits and home runs? An interactive look at one hitter’s 2025 season using Statcast data.</p>
+        <ul class="tags" aria-label="Tools used"><li>Python</li><li>pybaseball</li><li>pandas</li><li>Plotly</li></ul>
+      </article>
+    </div>
+  </main>
+
+  <footer>© <span id="yr">2026</span> Lucas Hsiong</footer>
+</div>
+<script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+</body>
+</html>
