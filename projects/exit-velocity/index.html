@@ -44,13 +44,13 @@
 
     <div class="story-block">
       <h2>The question</h2>
-      <p>[Why you wanted to look at this. What were you curious about?]</p>
+      <p>I put this graph together because I was curious about the batted ball profiles for each type of hit. Were there any launch angles or exit velocities that were particularly associated with certain outcomes?</p>
 
       <h2>The data</h2>
       <p>I pulled pitch-level Statcast data for the whole 2025 regular season with the pybaseball package, then kept the balls put in play that had a measured exit velocity and launch angle. Plate appearances are counted from the pitches that ended each one, so they can be off by a few. The dotted line marks 95 mph, which Statcast calls a hard-hit ball. For speed, the chart shows a random sample of 6,000 dots when more balls are selected, but the stats above it use every ball.</p>
 
       <h2>What I found</h2>
-      <p>[Two or three sentences about what stood out, such as where the home runs cluster and what happens to hard-hit balls at low launch angles.]</p>
+      <p>Home runs by far had the tightest cluster of launch angles and exit velocities - which makes sense since the ball needs to be hit at a high angle and with power to clear the wall. For singles and doubles, it seems like there's more variability in their profiles, but still a sweet spot where they tend to cluster. Triples showed a more dispersed pattern, with almost all of them being hard hit but all with varying launch angles.</p>
 
       <h2>Tools</h2>
       <ul class="tags" aria-label="Tools used"><li>Python</li><li>pybaseball</li><li>pandas</li><li>Plotly</li></ul>
